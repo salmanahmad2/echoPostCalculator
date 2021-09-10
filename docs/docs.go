@@ -190,8 +190,8 @@ var doc = `{
 				},
 				"/calculator/square": {
 					post: {
-					summary: Square of two numbers,		
-					  description: Calculate the value of the square of the two entered numbers,
+					summary: Square of a number,		
+					  description: Calculate the value of the square of a number,
 					  produces: [
 						application/json
 					  ],
@@ -199,7 +199,7 @@ var doc = `{
 						{
 						  "in": "body",
 						  "name": "Numbers",
-						  "description": "Enter value of number1 & number2",
+						  "description": "Enter value of number1",
 						  "properties":{
 						  "number1":{
 							  "type":"integer",
@@ -211,7 +211,7 @@ var doc = `{
 						  ],
 					  "responses": {
 						"200": {
-						  "description": "Square of numbers is successful"
+						  "description": "Square of a number is successful"
 						},
 					},
 				},
@@ -251,8 +251,8 @@ var doc = `{
 				},
 				"/calculator/sqrt": {
 					post: {
-					summary: Suqare root of two numbers,		
-					  description: Calculate the value of the square root of the two entered numbers,
+					summary: Suqare root of a number,		
+					  description: Calculate the value of the square root of the entered numbers,
 					  produces: [
 						application/json
 					  ],
@@ -260,7 +260,7 @@ var doc = `{
 						{
 						  "in": "body",
 						  "name": "Numbers",
-						  "description": "Enter value of number1 & number2",
+						  "description": "Enter value of number1",
 						  "properties":{
 						  "number1":{
 							  "type":"integer",
@@ -273,7 +273,7 @@ var doc = `{
 						  ],
 					  "responses": {
 						"200": {
-						  "description": "Square root of numbers is successful"
+						  "description": "Square root of number is successful"
 						},
 					},
 				},
