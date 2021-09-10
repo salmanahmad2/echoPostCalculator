@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"math"
 	"net/http"
-	"strconv"
 
 	"github.com/labstack/echo/v4"
 	//_ "github.com/salmanahmad2/echoPostCalculator"
@@ -15,8 +14,12 @@ import (
 )
 
 type Numbers struct {
-	Number1 int `json:"number1"`
-	Number2 int `json:"number2"`
+	Number1 float64 `json:"number1"`
+	Number2 float64 `json:"number2"`
+}
+
+type Response struct {
+	Result float64 `json:"result"`
 }
 
 // @title Calculator
@@ -48,8 +51,13 @@ func add(c echo.Context) error {
 		return err
 	}
 	fmt.Println(number)
+
 	add := number.Number1 + number.Number2
-	return c.String(http.StatusOK, "Addition is:"+strconv.Itoa(add))
+	//result:=Response{add}
+	result := Response{
+		add,
+	}
+	return c.JSON(http.StatusOK, result)
 }
 
 func sub(c echo.Context) error {
@@ -59,7 +67,10 @@ func sub(c echo.Context) error {
 	}
 	fmt.Println(number)
 	sub := number.Number1 - number.Number2
-	return c.String(http.StatusOK, "Subtraction is:"+strconv.Itoa(sub))
+	result := Response{
+		sub,
+	}
+	return c.JSON(http.StatusOK, result)
 }
 
 func multiply(c echo.Context) error {
@@ -69,7 +80,10 @@ func multiply(c echo.Context) error {
 	}
 	fmt.Println(number)
 	multiply := number.Number1 * number.Number2
-	return c.String(http.StatusOK, "Multiplication is:"+strconv.Itoa(multiply))
+	result := Response{
+		multiply,
+	}
+	return c.JSON(http.StatusOK, result)
 }
 
 func division(c echo.Context) error {
@@ -79,7 +93,10 @@ func division(c echo.Context) error {
 	}
 	fmt.Println(number)
 	var division float64 = float64(number.Number1) / float64(number.Number2)
-	return c.String(http.StatusOK, "Division is:"+strconv.FormatFloat(division, 'E', -1, 64))
+	result := Response{
+		division,
+	}
+	return c.JSON(http.StatusOK, result)
 }
 
 func modulus(c echo.Context) error {
@@ -88,8 +105,11 @@ func modulus(c echo.Context) error {
 		return err
 	}
 	fmt.Println(number)
-	modulus := number.Number1 % number.Number2
-	return c.String(http.StatusOK, "Modulus is:"+strconv.Itoa(modulus))
+	modulus := int(number.Number1) % int(number.Number2)
+	result := Response{
+		float64(modulus),
+	}
+	return c.JSON(http.StatusOK, result)
 }
 
 func square(c echo.Context) error {
@@ -99,8 +119,10 @@ func square(c echo.Context) error {
 	}
 	fmt.Println(number)
 	square1 := number.Number1 * number.Number1
-	square2 := number.Number2 * number.Number2
-	return c.String(http.StatusOK, "Square of "+strconv.Itoa(number.Number1)+" is "+strconv.Itoa(square1)+"\nSquare of "+strconv.Itoa(number.Number2)+" is "+strconv.Itoa(square2))
+	result := Response{
+		square1,
+	}
+	return c.JSON(http.StatusOK, result)
 }
 
 func power(c echo.Context) error {
@@ -109,8 +131,11 @@ func power(c echo.Context) error {
 		return err
 	}
 	fmt.Println(number)
-	power := math.Pow(float64(number.Number1), float64(number.Number1))
-	return c.String(http.StatusOK, "Number "+strconv.Itoa(number.Number1)+" raised to the power "+strconv.Itoa(number.Number2)+" is "+strconv.FormatFloat(power, 'E', -1, 64))
+	power := math.Pow(number.Number1, number.Number1)
+	result := Response{
+		power,
+	}
+	return c.JSON(http.StatusOK, result)
 }
 
 func sqrt(c echo.Context) error {
@@ -119,7 +144,10 @@ func sqrt(c echo.Context) error {
 		return err
 	}
 	fmt.Println(number)
-	sqrt1 := math.Sqrt(float64(number.Number1))
-	sqrt2 := math.Sqrt(float64(number.Number2))
-	return c.String(http.StatusOK, "Square root of "+strconv.Itoa(number.Number1)+" is "+strconv.FormatFloat(sqrt1, 'E', -1, 64)+"\nSquare root of "+strconv.Itoa(number.Number2)+" is "+strconv.FormatFloat(sqrt2, 'E', -1, 64))
+	sqrt1 := math.Sqrt(number.Number1)
+	result := Response{
+		sqrt1,
+	}
+	return c.JSON(http.StatusOK, result)
+
 }

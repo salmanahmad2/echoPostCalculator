@@ -205,11 +205,6 @@ var doc = `{
 							  "type":"integer",
 							  "format":"json"
 						  },
-			
-							"number2":{
-								"type":"integer",
-								"format":"json"
-							},
 							},
 						   
 						  }
@@ -272,10 +267,6 @@ var doc = `{
 							  "format":"json"
 						  },
 			
-							"number2":{
-								"type":"integer",
-								"format":"json"
-							},
 							},
 						   
 						  }
