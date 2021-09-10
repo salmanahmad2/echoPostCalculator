@@ -22,7 +22,273 @@ var doc = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+		"/calculator/add": {
+			post: {
+			summary: Add two numbers,		
+			  description: Calculate the addition of the two entered numbers,
+			  produces: [
+				application/json
+			  ],
+			  "parameters": [
+				{
+				  "in": "body",
+				  "name": "Numbers",
+				  "description": "Enter value of number1 & number2",
+				  "properties":{
+				  "number1":{
+					  "type":"integer",
+					  "format":"json"
+				  },
+	
+					"number2":{
+						"type":"integer",
+						"format":"json"
+					},
+					},
+				   
+				  },
+				  ],
+			  "responses": {
+				"200": {
+				  "description": "Addition of numbers is successful"
+				},
+			},
+		},
+		},
+			"/calculator/subtract": {
+				post: {
+				summary: Subtract two numbers,		
+				  description: Calculate the value of the subtraction of the two entered numbers,
+				  produces: [
+					application/json
+				  ],
+				  "parameters":[
+					{
+					  "in": "body",
+					  "name": "Numbers",
+					  "description": "Enter value of number1 & number2",
+					  "properties":{
+					  "number1":{
+						  "type":"integer",
+						  "format":"json"
+					  },
+		
+						"number2":{
+							"type":"integer",
+							"format":"json"
+						},
+						},
+					   
+					  },
+					  ],
+				  "responses": {
+					"200": {
+					  "description": "Subtraction of numbers is successful"
+					},
+				},
+			},
+			},
+				"/calculator/multiply": {
+					post: {
+					summary: Multiply two numbers,		
+					  description: Calculate the value of the multiplicaion of the two entered numbers,
+					  produces: [
+						application/json
+					  ],
+					  "parameters":[
+						{
+						  "in": "body",
+						  "name": "Numbers",
+						  "description": "Enter value of number1 & number2",
+						  "properties":{
+						  "number1":{
+							  "type":"integer",
+							  "format":"json"
+						  },
+			
+							"number2":{
+								"type":"integer",
+								"format":"json"
+							},
+							},
+						   
+						  }
+						  ],
+					  "responses": {
+						"200": {
+						  "description": "Multiplication of numbers is successful"
+						},
+					},
+				},
+				},
+				"/calculator/divide": {
+					post: {
+					summary: Divide two numbers,		
+					  description: Calculate the value of the division of the two entered numbers,
+					  produces: [
+						application/json
+					  ],
+					  "parameters":[
+						{
+						  "in": "body",
+						  "name": "Numbers",
+						  "description": "Enter value of number1 & number2",
+						  "properties":{
+						  "number1":{
+							  "type":"integer",
+							  "format":"json"
+						  },
+			
+							"number2":{
+								"type":"integer",
+								"format":"json"
+							},
+							},
+						   
+						  }
+						  ],
+					  "responses": {
+						"200": {
+						  "description": "Division of numbers is successful"
+						},
+					},
+				},
+				},
+				"/calculator/modulus": {
+					post: {
+					summary: Modulus of two numbers,		
+					  description: Calculate the value of the modulus of the two entered numbers,
+					  produces: [
+						application/json
+					  ],
+					  "parameters":[
+						{
+						  "in": "body",
+						  "name": "Numbers",
+						  "description": "Enter value of number1 & number2",
+						  "properties":{
+						  "number1":{
+							  "type":"integer",
+							  "format":"json"
+						  },
+			
+							"number2":{
+								"type":"integer",
+								"format":"json"
+							},
+							},
+						   
+						  }
+						  ],
+					  "responses": {
+						"200": {
+						  "description": "Modulus of numbers is successful"
+						},
+					},
+				},
+				},
+				"/calculator/square": {
+					post: {
+					summary: Square of two numbers,		
+					  description: Calculate the value of the square of the two entered numbers,
+					  produces: [
+						application/json
+					  ],
+					  "parameters":[
+						{
+						  "in": "body",
+						  "name": "Numbers",
+						  "description": "Enter value of number1 & number2",
+						  "properties":{
+						  "number1":{
+							  "type":"integer",
+							  "format":"json"
+						  },
+			
+							"number2":{
+								"type":"integer",
+								"format":"json"
+							},
+							},
+						   
+						  }
+						  ],
+					  "responses": {
+						"200": {
+						  "description": "Square of numbers is successful"
+						},
+					},
+				},
+				},
+				"/calculator/power": {
+					post: {
+					summary: Power of number,		
+					  description: Calculate the value of the number1 raised to the power number2,
+					  produces: [
+						application/json
+					  ],
+					  "parameters":[
+						{
+						  "in": "body",
+						  "name": "Numbers",
+						  "description": "Enter value of number1 & number2",
+						  "properties":{
+						  "number1":{
+							  "type":"integer",
+							  "format":"json"
+						  },
+			
+							"number2":{
+								"type":"integer",
+								"format":"json"
+							},
+							},
+						   
+						  }
+						  ],
+					  "responses": {
+						"200": {
+						  "description": "Power of numbers is successful"
+						},
+					},
+				},
+				},
+				"/calculator/sqrt": {
+					post: {
+					summary: Suqare root of two numbers,		
+					  description: Calculate the value of the square root of the two entered numbers,
+					  produces: [
+						application/json
+					  ],
+					  "parameters":[
+						{
+						  "in": "body",
+						  "name": "Numbers",
+						  "description": "Enter value of number1 & number2",
+						  "properties":{
+						  "number1":{
+							  "type":"integer",
+							  "format":"json"
+						  },
+			
+							"number2":{
+								"type":"integer",
+								"format":"json"
+							},
+							},
+						   
+						  }
+						  ],
+					  "responses": {
+						"200": {
+						  "description": "Square root of numbers is successful"
+						},
+					},
+				},
+				},
+				
+		}, 
 }`
 
 type swaggerInfo struct {
@@ -41,7 +307,7 @@ var SwaggerInfo = swaggerInfo{
 	BasePath:    "/",
 	Schemes:     []string{},
 	Title:       "Calculator",
-	Description: "different example",
+	Description: "Different operations of calculator",
 }
 
 type s struct{}

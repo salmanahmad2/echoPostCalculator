@@ -7,6 +7,11 @@ import (
 	"strconv"
 
 	"github.com/labstack/echo/v4"
+	//_ "github.com/salmanahmad2/echoPostCalculator"
+
+	echoSwagger "github.com/swaggo/echo-swagger"
+	// _ "github.com/swaggo/echo-swagger/example/docs"
+	_ "github.com/salmanahmad2/echoPostCalculator/docs"
 )
 
 type Numbers struct {
@@ -14,20 +19,29 @@ type Numbers struct {
 	Number2 int `json:"number2"`
 }
 
+// @title Calculator
+// @version 2.0
+// @description Different operations of calculator.
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+// @host localhost:1323
+// @BasePath /
 func main() {
 	e := echo.New()
 
 	e.POST("/calculator/add", add)
-	e.POST("calculator/sub", sub)
+	e.POST("/calculator/subtract", sub)
 	e.POST("/calculator/multiply", multiply)
-	e.POST("/calculator/division", division)
+	e.POST("/calculator/divide", division)
 	e.POST("/calculator/modulus", modulus)
 	e.POST("/calculator/square", square)
 	e.POST("/calculator/power", power)
 	e.POST("/calculator/sqrt", sqrt)
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
+
 func add(c echo.Context) error {
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
