@@ -17,7 +17,7 @@ type Response struct {
 	Result float64 `json:"result"`
 }
 
-func add(c echo.Context) error {
+func Add(c echo.Context) error {
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
 		return err
@@ -32,7 +32,7 @@ func add(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 }
 
-func sub(c echo.Context) error {
+func Sub(c echo.Context) error {
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
 		return err
@@ -45,7 +45,7 @@ func sub(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 }
 
-func multiply(c echo.Context) error {
+func Multiply(c echo.Context) error {
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
 		return err
@@ -58,7 +58,7 @@ func multiply(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 }
 
-func division(c echo.Context) error {
+func Division(c echo.Context) error {
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
 		return err
@@ -71,7 +71,7 @@ func division(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 }
 
-func modulus(c echo.Context) error {
+func Modulus(c echo.Context) error {
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
 		return err
@@ -84,7 +84,7 @@ func modulus(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 }
 
-func square(c echo.Context) error {
+func Square(c echo.Context) error {
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
 		return err
@@ -97,7 +97,7 @@ func square(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 }
 
-func power(c echo.Context) error {
+func Power(c echo.Context) error {
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
 		return err
@@ -110,7 +110,7 @@ func power(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 }
 
-func sqrt(c echo.Context) error {
+func Sqrt(c echo.Context) error {
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
 		return err
