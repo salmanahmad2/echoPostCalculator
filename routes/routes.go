@@ -6,7 +6,7 @@ import (
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
-func Handler(e *echo.Echo) {
+func Routes(e *echo.Echo) {
 	e.POST("/calculator/add", controller.Add)
 	e.POST("/calculator/subtract", controller.Sub)
 	e.POST("/calculator/multiply", controller.Multiply)
