@@ -22,6 +22,23 @@ type Response struct {
 	Result float64 `json:"result"`
 }
 
+func (number Numbers) Connect(result float64, operation string) {
+	db := database.DatabaseConnection()
+
+	defer db.Close()
+	sql := "INSERT INTO calculate(number1, number2, operation, result) VALUES( ?, ?,?, ?)"
+	stmt, err := db.Prepare(sql)
+	if err != nil {
+		fmt.Print(err.Error())
+	}
+	defer stmt.Close()
+	_, err2 := stmt.Exec(number.Number1, number.Number2, operation, result)
+
+	if err2 != nil {
+		panic(err2)
+	}
+}
+
 func Add(c echo.Context) error {
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
@@ -34,15 +51,7 @@ func Add(c echo.Context) error {
 	result := Response{
 		add,
 	}
-	db := database.DatabaseConnection()
-	sql := "INSERT INTO calculator(number1, number2, operation, result) VALUES( number.Number1, number.Number2, add, result)"
-
-	_, err := db.Exec(sql)
-	defer db.Close()
-
-	if err != nil {
-		fmt.Print(err.Error())
-	}
+	number.Connect(add, "+")
 
 	return c.JSON(http.StatusOK, result)
 }
@@ -57,6 +66,8 @@ func Sub(c echo.Context) error {
 	result := Response{
 		sub,
 	}
+	number.Connect(sub, "-")
+
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -70,6 +81,7 @@ func Multiply(c echo.Context) error {
 	result := Response{
 		multiply,
 	}
+	number.Connect(multiply, "*")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -83,6 +95,7 @@ func Division(c echo.Context) error {
 	result := Response{
 		division,
 	}
+	number.Connect(division, "/")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -96,6 +109,7 @@ func Modulus(c echo.Context) error {
 	result := Response{
 		float64(modulus),
 	}
+	number.Connect(float64(modulus), "%")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -109,6 +123,7 @@ func Square(c echo.Context) error {
 	result := Response{
 		square1,
 	}
+	number.Connect(square1, "square")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -118,10 +133,11 @@ func Power(c echo.Context) error {
 		return err
 	}
 	fmt.Println(number)
-	power := math.Pow(number.Number1, number.Number1)
+	power := math.Pow(number.Number1, number.Number2)
 	result := Response{
 		power,
 	}
+	number.Connect(power, "power")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -135,6 +151,7 @@ func Sqrt(c echo.Context) error {
 	result := Response{
 		sqrt1,
 	}
+	number.Connect(sqrt1, "square root")
 	return c.JSON(http.StatusOK, result)
 
 }
