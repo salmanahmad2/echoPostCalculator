@@ -1,9 +1,14 @@
 package controller
 
 import (
+	_ "database/sql"
 	"fmt"
 	"math"
 	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/salmanahmad2/echoPostCalculator/database"
+	_ "github.com/salmanahmad2/echoPostCalculator/database"
 
 	"github.com/labstack/echo/v4"
 )
@@ -29,6 +34,16 @@ func Add(c echo.Context) error {
 	result := Response{
 		add,
 	}
+	db := database.DatabaseConnection()
+	sql := "INSERT INTO calculator(number1, number2, operation, result) VALUES( number.Number1, number.Number2, add, result)"
+
+	_, err := db.Exec(sql)
+	defer db.Close()
+
+	if err != nil {
+		fmt.Print(err.Error())
+	}
+
 	return c.JSON(http.StatusOK, result)
 }
 

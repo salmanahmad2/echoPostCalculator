@@ -12,7 +12,7 @@ func DatabaseConnection() *sql.DB {
 	} else {
 		fmt.Println("db is connected")
 	}
-	defer db.Close()
+
 	// make sure connection is available
 	err = db.Ping()
 	if err != nil {
