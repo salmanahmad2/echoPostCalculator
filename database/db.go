@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func DatabaseConnection() {
+func DatabaseConnection() *sql.DB {
 	db, err := sql.Open("mysql", "root:salman12@tcp(127.0.0.1:3306)/calculator")
 	if err != nil {
 		fmt.Println(err.Error())
@@ -18,5 +18,6 @@ func DatabaseConnection() {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	return db
 
 }
