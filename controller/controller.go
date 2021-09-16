@@ -61,15 +61,12 @@ func GetRecord(c echo.Context) error {
 	var Operation string
 	var Result float64
 	var createdAt string
-	recordId := new(getId)
-	if err := c.Bind(recordId); err != nil {
-		return err
-	}
-	fmt.Println(recordId)
+
 	db := database.DatabaseConnection()
 	defer db.Close()
+	ID := c.Param("id")
 
-	Err := db.QueryRow("SELECT * FROM calculate WHERE ID = ?", recordId.ID).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
+	Err := db.QueryRow("SELECT * FROM calculate WHERE ID = ?", ID).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
 	if Err != nil {
 		fmt.Println(Err.Error())
 	}

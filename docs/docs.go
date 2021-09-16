@@ -278,22 +278,22 @@ var doc = `{
 					},
 				},
 				},
-				"/calculator/getRecord": {
-					post: {
-					summary: Post record by user id,		
+				"/calculator/getRecord/:id": {
+					Get: {
+					summary: Show record by user id,		
 					  description: Returns the reocrd by user id,
 					  produces: [
 						application/json
 					  ],
 					  "parameters":[
 						{
-						  "in": "body",
+						  "in": "path",
 						  "name": "ID",
-						  "description": "Enter user id",
+						  
 						  "properties":{
-						  "id":{
+						  schema:
 							  "type":"integer",
-							  "format":"json"
+							 
 						  },
 							},
 						   
