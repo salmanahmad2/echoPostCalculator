@@ -71,7 +71,7 @@ func GetRecord(c echo.Context) error {
 
 	defer db.Close()
 
-	Err := db.QueryRow("SELECT * FROM album WHERE ID = ?", recordId).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
+	Err := db.QueryRow("SELECT * FROM calculate WHERE ID = ?", recordId).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
 	if Err != nil {
 		fmt.Println(Err.Error())
 	}
