@@ -289,9 +289,9 @@ var doc = `{
 						{
 						  "in": "path",
 						  "name": "ID",
-						  schema:
-							  "type":"integer",
-							
+						  schema:{
+							  "type":"integer"
+						  },
 						   
 						  },
 						  ],
