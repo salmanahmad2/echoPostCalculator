@@ -262,7 +262,7 @@ var doc = `{
 						  "name": "Numbers",
 						  "description": "Enter value of number1",
 						  "properties":{
-						  "id":{
+						  "number1":{
 							  "type":"integer",
 							  "format":"json"
 						  },
@@ -273,7 +273,7 @@ var doc = `{
 						  ],
 					  "responses": {
 						"200": {
-						  "description": "Record has been displayed successfully"
+						  "description": "Square root of number is successful"
 						},
 					},
 				},
@@ -301,7 +301,7 @@ var doc = `{
 						  ],
 					  "responses": {
 						"200": {
-						  "description": "Subtraction of numbers is successful"
+						  "description": "Record has been displayed"
 						},
 					},
 				},

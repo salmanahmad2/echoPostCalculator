@@ -23,6 +23,9 @@ type Response struct {
 	Result float64 `json:"result"`
 }
 
+type getId struct {
+	ID int `json:"id"`
+}
 type fetchedData struct {
 	Id      int     `json:"id"`
 	Num1    float64 `json:"num1"`
@@ -52,24 +55,33 @@ func (number Numbers) Connect(result float64, operation string) {
 }
 
 func GetRecord(c echo.Context) error {
-	db := database.DatabaseConnection()
 
-	defer db.Close()
 	var number1 float64
 	var id int
 	var number2 float64
 	var Operation string
 	var Result float64
 	var createdAt string
-	Err := db.QueryRow("SELECT * FROM album WHERE ID = ?", 5).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
+	recordId := new(getId)
+	if err := c.Bind(recordId); err != nil {
+		return err
+	}
+	fmt.Println(recordId)
+	db := database.DatabaseConnection()
+
+	defer db.Close()
+
+	Err := db.QueryRow("SELECT * FROM album WHERE ID = ?", recordId).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
 	if Err != nil {
 		fmt.Println(Err.Error())
 	}
 	response := fetchedData{Id: id, Num1: number1, Num2: number2, Opr: Operation, Rslt: Result, Created: createdAt}
+	fmt.Println(response)
 	return c.JSON(http.StatusOK, response)
 }
 
 func Add(c echo.Context) error {
+	fmt.Println("hiAdd")
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
 		return err
