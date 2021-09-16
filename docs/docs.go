@@ -290,7 +290,7 @@ var doc = `{
 						  "in": "path",
 						  "name": "ID",
 						  schema:
-							  "type":"integer"
+							  "type":"integer",
 							
 						   
 						  },
