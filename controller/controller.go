@@ -68,9 +68,8 @@ func GetRecord(c echo.Context) error {
 	fmt.Println(recordId)
 	db := database.DatabaseConnection()
 	defer db.Close()
-	fmt.Println(*recordId)
 
-	Err := db.QueryRow("SELECT * FROM calculate WHERE ID = ?", &recordId).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
+	Err := db.QueryRow("SELECT * FROM calculate WHERE ID = ?", recordId.ID).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
 	if Err != nil {
 		fmt.Println(Err.Error())
 	}
