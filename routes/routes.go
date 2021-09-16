@@ -10,7 +10,7 @@ import (
 
 func Routes(e *echo.Echo) {
 	fmt.Println("hiRoute")
-	e.POST("/calculator/id", controller.GetRecord)
+	e.POST("/calculator/getRecord", controller.GetRecord)
 	e.POST("/calculator/add", controller.Add)
 	e.POST("/calculator/subtract", controller.Sub)
 	e.POST("/calculator/multiply", controller.Multiply)

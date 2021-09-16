@@ -278,7 +278,7 @@ var doc = `{
 					},
 				},
 				},
-				"/calculator/GetRecord": {
+				"/calculator/getRecord": {
 					post: {
 					summary: Post record by user id,		
 					  description: Returns the reocrd by user id,
