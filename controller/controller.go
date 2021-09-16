@@ -55,7 +55,7 @@ func (number Numbers) Connect(result float64, operation string) {
 }
 
 func GetRecord(c echo.Context) error {
-
+	fmt.Println("hiGet")
 	var number1 float64
 	var id int
 	var number2 float64
@@ -81,7 +81,7 @@ func GetRecord(c echo.Context) error {
 }
 
 func Add(c echo.Context) error {
-	fmt.Println("hiAdd")
+
 	number := new(Numbers)
 	if err := c.Bind(number); err != nil {
 		return err
