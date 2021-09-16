@@ -279,7 +279,7 @@ var doc = `{
 				},
 				},
 				"/calculator/getRecord/{id}": {
-					Get: {
+					get: {
 					summary: Show record by user id,		
 					  "parameters":[
 						{
