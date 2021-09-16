@@ -1,16 +1,14 @@
 package routes
 
 import (
-	"fmt"
-
 	"github.com/labstack/echo/v4"
 	"github.com/salmanahmad2/echoPostCalculator/controller"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 func Routes(e *echo.Echo) {
-	fmt.Println("hiRoute")
-	e.GET("/calculator/getRecord/:id", controller.GetRecord)
+
+	e.GET("/calculator/getRecord/{id}", controller.GetRecord)
 	e.POST("/calculator/add", controller.Add)
 	e.POST("/calculator/subtract", controller.Sub)
 	e.POST("/calculator/multiply", controller.Multiply)
