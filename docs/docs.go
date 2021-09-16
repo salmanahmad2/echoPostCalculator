@@ -281,10 +281,6 @@ var doc = `{
 				"/calculator/getRecord/:id": {
 					Get: {
 					summary: Show record by user id,		
-					  description: Returns the reocrd by user id,
-					  produces: [
-						application/json
-					  ],
 					  "parameters":[
 						{
 						  "in": "path",
