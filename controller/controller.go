@@ -55,7 +55,6 @@ func (number Numbers) Connect(result float64, operation string) {
 }
 
 func GetRecord(c echo.Context) error {
-	fmt.Println("hiGet")
 	var number1 float64
 	var id int
 	var number2 float64
@@ -68,13 +67,14 @@ func GetRecord(c echo.Context) error {
 	}
 	fmt.Println(recordId)
 	db := database.DatabaseConnection()
-
 	defer db.Close()
+	fmt.Println(*recordId)
 
-	Err := db.QueryRow("SELECT * FROM calculate WHERE ID = ?", recordId).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
+	Err := db.QueryRow("SELECT * FROM calculate WHERE ID = ?", &recordId).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
 	if Err != nil {
 		fmt.Println(Err.Error())
 	}
+	fmt.Println("hi2")
 	response := fetchedData{Id: id, Num1: number1, Num2: number2, Opr: Operation, Rslt: Result, Created: createdAt}
 	fmt.Println(response)
 	return c.JSON(http.StatusOK, response)
