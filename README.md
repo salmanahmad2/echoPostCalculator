@@ -21,3 +21,9 @@ I have used [swagger](https://swagger.io/solutions/api-documentation/) for docum
 ### Database Output
 
 ![db](https://user-images.githubusercontent.com/88362552/133260942-32e4fb47-043a-43f7-96a9-8cb6c494afd6.png)
+
+### Get record using id
+
+![task3_6](https://user-images.githubusercontent.com/88362552/133598622-861d5864-03a7-40c1-8630-6add3d619fd8.png)
+
+![task3_5](https://user-images.githubusercontent.com/88362552/133598771-ed14ee37-b497-4e9e-8846-2fa1914f6e44.png)
