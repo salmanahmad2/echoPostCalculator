@@ -292,9 +292,7 @@ var doc = `{
 						  
 						  "properties":{
 						  schema:
-							  "type":"integer",
-							 
-						  },
+							  "type":"integer"
 							},
 						   
 						  },
