@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
+
 	"github.com/salmanahmad2/echoPostCalculator/database"
 	_ "github.com/salmanahmad2/echoPostCalculator/database"
 
@@ -22,6 +23,15 @@ type Response struct {
 	Result float64 `json:"result"`
 }
 
+type fetchedData struct {
+	Id      int     `json:"id"`
+	Num1    float64 `json:"num1"`
+	Num2    float64 `json:"num2"`
+	Opr     string  `json:"operation"`
+	Rslt    float64 `json:"result"`
+	Created string  `json:"created at"`
+}
+
 func (number Numbers) Connect(result float64, operation string) {
 	db := database.DatabaseConnection()
 
@@ -31,12 +41,32 @@ func (number Numbers) Connect(result float64, operation string) {
 	if err != nil {
 		fmt.Print(err.Error())
 	}
+
 	defer stmt.Close()
+
 	_, err2 := stmt.Exec(number.Number1, number.Number2, operation, result)
 
 	if err2 != nil {
 		panic(err2)
 	}
+}
+
+func GetRecord(c echo.Context) error {
+	db := database.DatabaseConnection()
+
+	defer db.Close()
+	var number1 float64
+	var id int
+	var number2 float64
+	var Operation string
+	var Result float64
+	var createdAt string
+	Err := db.QueryRow("SELECT * FROM album WHERE ID = ?", 5).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
+	if Err != nil {
+		fmt.Println(Err.Error())
+	}
+	response := fetchedData{Id: id, Num1: number1, Num2: number2, Opr: Operation, Rslt: Result, Created: createdAt}
+	return c.JSON(http.StatusOK, response)
 }
 
 func Add(c echo.Context) error {

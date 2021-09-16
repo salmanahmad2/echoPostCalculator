@@ -262,7 +262,7 @@ var doc = `{
 						  "name": "Numbers",
 						  "description": "Enter value of number1",
 						  "properties":{
-						  "number1":{
+						  "id":{
 							  "type":"integer",
 							  "format":"json"
 						  },
@@ -273,12 +273,39 @@ var doc = `{
 						  ],
 					  "responses": {
 						"200": {
-						  "description": "Square root of number is successful"
+						  "description": "Record has been displayed successfully"
 						},
 					},
 				},
 				},
-				
+				"/calculator/GetRecord": {
+					post: {
+					summary: Post record by user id,		
+					  description: Returns the reocrd by user id,
+					  produces: [
+						application/json
+					  ],
+					  "parameters":[
+						{
+						  "in": "body",
+						  "name": "ID",
+						  "description": "Enter user id",
+						  "properties":{
+						  "id":{
+							  "type":"integer",
+							  "format":"json"
+						  },
+							},
+						   
+						  },
+						  ],
+					  "responses": {
+						"200": {
+						  "description": "Subtraction of numbers is successful"
+						},
+					},
+				},
+				},
 		}, 
 }`
 
