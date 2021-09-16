@@ -35,7 +35,7 @@ type fetchedData struct {
 	Created string  `json:"created at"`
 }
 
-func (number Numbers) Connect(result float64, operation string) {
+func (number Numbers) insertIntoDatabase(result float64, operation string) {
 	db := database.DatabaseConnection()
 
 	defer db.Close()
@@ -73,7 +73,6 @@ func GetRecord(c echo.Context) error {
 	if Err != nil {
 		fmt.Println(Err.Error())
 	}
-	fmt.Println("hi2")
 	response := fetchedData{Id: id, Num1: number1, Num2: number2, Opr: Operation, Rslt: Result, Created: createdAt}
 	fmt.Println(response)
 	return c.JSON(http.StatusOK, response)
@@ -92,7 +91,7 @@ func Add(c echo.Context) error {
 	result := Response{
 		add,
 	}
-	number.Connect(add, "+")
+	number.insertIntoDatabase(add, "+")
 
 	return c.JSON(http.StatusOK, result)
 }
@@ -107,7 +106,7 @@ func Sub(c echo.Context) error {
 	result := Response{
 		sub,
 	}
-	number.Connect(sub, "-")
+	number.insertIntoDatabase(sub, "-")
 
 	return c.JSON(http.StatusOK, result)
 }
@@ -122,7 +121,7 @@ func Multiply(c echo.Context) error {
 	result := Response{
 		multiply,
 	}
-	number.Connect(multiply, "*")
+	number.insertIntoDatabase(multiply, "*")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -136,7 +135,7 @@ func Division(c echo.Context) error {
 	result := Response{
 		division,
 	}
-	number.Connect(division, "/")
+	number.insertIntoDatabase(division, "/")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -150,7 +149,7 @@ func Modulus(c echo.Context) error {
 	result := Response{
 		float64(modulus),
 	}
-	number.Connect(float64(modulus), "%")
+	number.insertIntoDatabase(float64(modulus), "%")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -164,7 +163,7 @@ func Square(c echo.Context) error {
 	result := Response{
 		square1,
 	}
-	number.Connect(square1, "square")
+	number.insertIntoDatabase(square1, "square")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -178,7 +177,7 @@ func Power(c echo.Context) error {
 	result := Response{
 		power,
 	}
-	number.Connect(power, "power")
+	number.insertIntoDatabase(power, "power")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -192,7 +191,7 @@ func Sqrt(c echo.Context) error {
 	result := Response{
 		sqrt1,
 	}
-	number.Connect(sqrt1, "square root")
+	number.insertIntoDatabase(sqrt1, "square root")
 	return c.JSON(http.StatusOK, result)
 	//hello
 
