@@ -281,19 +281,30 @@ var doc = `{
 				"/calculator/getRecord/{id}": {
 					get: {
 					summary: Show record by user id,		
-					  "parameters":[
+					"parameters": [
 						{
-						  "in": "path",
-						  "name": "ID",
-						  schema:{
-							  "type":"integer"
-						  },
-						   
-						  },
-						  ],
-					  "responses": {
+							"name": "id",
+							"in": "path",
+							"description": "ID for the specific log",
+							"required": true,
+							"type": "integer",
+							"format": "int64"
+						}
+					],
+					"responses": {
 						"200": {
 						  "description": "Record has been displayed"
+						},
+					},
+				},
+				},
+				"/calculator/getAllRecords": {
+					get: {
+					summary: Show all records,		
+
+					"responses": {
+						"200": {
+						  "description": "Records have been displayed"
 						},
 					},
 				},

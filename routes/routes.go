@@ -9,6 +9,7 @@ import (
 func Routes(e *echo.Echo) {
 
 	e.GET("/calculator/getRecord/:id", controller.GetRecord)
+	e.GET("/calculator/getAllRecords", controller.GetAllRecords)
 	e.POST("/calculator/add", controller.Add)
 	e.POST("/calculator/subtract", controller.Sub)
 	e.POST("/calculator/multiply", controller.Multiply)

@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"database/sql"
 	_ "database/sql"
 	"fmt"
 	"math"
@@ -14,6 +15,9 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+var check int
+var db *sql.DB
+
 type Numbers struct {
 	Number1 float64 `json:"number1"`
 	Number2 float64 `json:"number2"`
@@ -23,9 +27,9 @@ type Response struct {
 	Result float64 `json:"result"`
 }
 
-type getId struct {
-	ID int `json:"id"`
-}
+// type getId struct {
+// 	ID int `json:"id"`
+// }
 type fetchedData struct {
 	Id      int     `json:"id"`
 	Num1    float64 `json:"num1"`
@@ -35,10 +39,24 @@ type fetchedData struct {
 	Created string  `json:"created at"`
 }
 
-func (number Numbers) insertIntoDatabase(result float64, operation string) {
-	db := database.DatabaseConnection()
+type fetchedAllData struct {
+	AllData []fetchedData `json:"alldata"`
+}
 
-	defer db.Close()
+func connectToDb() {
+	DB := database.DatabaseConnection()
+	db = DB
+	check = 1
+}
+func (number Numbers) insertIntoDatabase(result float64, operation string) {
+
+	if check == 1 {
+
+	} else {
+		connectToDb()
+	}
+
+	//defer db.Close()
 	sql := "INSERT INTO calculate(number1, number2, operation, result) VALUES( ?, ?,?, ?)"
 	stmt, err := db.Prepare(sql)
 	if err != nil {
@@ -56,24 +74,62 @@ func (number Numbers) insertIntoDatabase(result float64, operation string) {
 
 func GetRecord(c echo.Context) error {
 	var number1 float64
-	var id int
+	var ID int
 	var number2 float64
 	var Operation string
 	var Result float64
 	var createdAt string
 
-	db := database.DatabaseConnection()
-	defer db.Close()
-	ID := c.Param("id")
-	fmt.Println(ID)
+	if check == 1 {
 
-	Err := db.QueryRow("SELECT * FROM calculate WHERE ID = ?", ID).Scan(&id, &number1, &number2, &Operation, &Result, &createdAt)
+	} else {
+		connectToDb()
+	}
+	id := c.Param("id")
+	fmt.Println(id)
+
+	Err := db.QueryRow("SELECT * FROM calculate WHERE ID = ?", id).Scan(&ID, &number1, &number2, &Operation, &Result, &createdAt)
 	if Err != nil {
 		fmt.Println(Err.Error())
 	}
-	response := fetchedData{Id: id, Num1: number1, Num2: number2, Opr: Operation, Rslt: Result, Created: createdAt}
+	response := fetchedData{Id: ID, Num1: number1, Num2: number2, Opr: Operation, Rslt: Result, Created: createdAt}
 	fmt.Println(response)
 	return c.JSON(http.StatusOK, response)
+}
+
+func GetAllRecords(c echo.Context) error {
+	var number1 float64
+	var ID int
+	var number2 float64
+	var Operation string
+	var Result float64
+	var createdAt string
+
+	if check == 1 {
+
+	} else {
+		connectToDb()
+	}
+
+	respData := make([]fetchedData, 0)
+	rows, err := db.Query("SELECT * FROM calculate")
+	if err != nil {
+		fmt.Println(err.Error)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		if err := rows.Scan(&ID, &number1, &number2, &Operation, &Result, &createdAt); err != nil {
+			panic(err)
+		}
+		record := fetchedData{Id: ID, Num1: number1, Num2: number2, Opr: Operation, Rslt: Result, Created: createdAt}
+
+		respData = append(respData, record)
+	}
+	if err := rows.Err(); err != nil {
+		panic(err)
+	}
+	return c.JSON(http.StatusOK, respData)
 }
 
 func Add(c echo.Context) error {
