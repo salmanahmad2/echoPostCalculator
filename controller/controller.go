@@ -2,14 +2,13 @@ package controller
 
 import (
 	"database/sql"
-	_ "database/sql"
 	"fmt"
 	"math"
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/salmanahmad2/echoPostCalculator/database"
+	//"github.com/salmanahmad2/echoPostCalculator/database"
 	_ "github.com/salmanahmad2/echoPostCalculator/database"
 
 	"github.com/labstack/echo/v4"
@@ -17,6 +16,10 @@ import (
 
 var check int
 var db *sql.DB
+
+func SetDB(DB *sql.DB) {
+	db = DB
+}
 
 type Numbers struct {
 	Number1 float64 `json:"number1"`
@@ -39,22 +42,7 @@ type fetchedData struct {
 	Created string  `json:"created at"`
 }
 
-type fetchedAllData struct {
-	AllData []fetchedData `json:"alldata"`
-}
-
-func connectToDb() {
-	DB := database.DatabaseConnection()
-	db = DB
-	check = 1
-}
 func (number Numbers) insertIntoDatabase(result float64, operation string) {
-
-	if check == 1 {
-
-	} else {
-		connectToDb()
-	}
 
 	//defer db.Close()
 	sql := "INSERT INTO calculate(number1, number2, operation, result) VALUES( ?, ?,?, ?)"
@@ -73,6 +61,8 @@ func (number Numbers) insertIntoDatabase(result float64, operation string) {
 }
 
 func GetRecord(c echo.Context) error {
+	fmt.Println("HEADER")
+	fmt.Println(c.Request().Header["Authorization"])
 	var number1 float64
 	var ID int
 	var number2 float64
@@ -80,11 +70,6 @@ func GetRecord(c echo.Context) error {
 	var Result float64
 	var createdAt string
 
-	if check == 1 {
-
-	} else {
-		connectToDb()
-	}
 	id := c.Param("id")
 	fmt.Println(id)
 
@@ -105,16 +90,10 @@ func GetAllRecords(c echo.Context) error {
 	var Result float64
 	var createdAt string
 
-	if check == 1 {
-
-	} else {
-		connectToDb()
-	}
-
 	respData := make([]fetchedData, 0)
 	rows, err := db.Query("SELECT * FROM calculate")
 	if err != nil {
-		fmt.Println(err.Error)
+		return err
 	}
 	defer rows.Close()
 

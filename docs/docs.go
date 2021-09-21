@@ -22,9 +22,26 @@ var doc = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
+	
+  securityDefinitions:{
+    Bearer:{       
+      type: apiKey,
+     
+	  in: header,
+	  name: Authorization,
+    
+	  },
+	  },
+	    
+
     "paths": {
+		
 		"/calculator/add": {
-			post: {
+
+			post: {	
+				security: [{
+					Bearer: []
+				}],
 			summary: Add two numbers,		
 			  description: Calculate the addition of the two entered numbers,
 			  produces: [
@@ -58,6 +75,9 @@ var doc = `{
 		},
 			"/calculator/subtract": {
 				post: {
+					security: [{
+						Bearer: []
+					}],
 				summary: Subtract two numbers,		
 				  description: Calculate the value of the subtraction of the two entered numbers,
 				  produces: [
@@ -91,6 +111,9 @@ var doc = `{
 			},
 				"/calculator/multiply": {
 					post: {
+						security: [{
+							Bearer: []
+						}],
 					summary: Multiply two numbers,		
 					  description: Calculate the value of the multiplicaion of the two entered numbers,
 					  produces: [
@@ -124,6 +147,9 @@ var doc = `{
 				},
 				"/calculator/divide": {
 					post: {
+						security: [{
+							Bearer: []
+						}],
 					summary: Divide two numbers,		
 					  description: Calculate the value of the division of the two entered numbers,
 					  produces: [
@@ -157,6 +183,9 @@ var doc = `{
 				},
 				"/calculator/modulus": {
 					post: {
+						security: [{
+							Bearer: []
+						}],
 					summary: Modulus of two numbers,		
 					  description: Calculate the value of the modulus of the two entered numbers,
 					  produces: [
@@ -190,6 +219,9 @@ var doc = `{
 				},
 				"/calculator/square": {
 					post: {
+						security: [{
+							Bearer: []
+						}],
 					summary: Square of a number,		
 					  description: Calculate the value of the square of a number,
 					  produces: [
@@ -218,6 +250,9 @@ var doc = `{
 				},
 				"/calculator/power": {
 					post: {
+						security: [{
+							Bearer: []
+						}],
 					summary: Power of number,		
 					  description: Calculate the value of the number1 raised to the power number2,
 					  produces: [
@@ -251,6 +286,9 @@ var doc = `{
 				},
 				"/calculator/sqrt": {
 					post: {
+						security: [{
+							Bearer: []
+						}],
 					summary: Suqare root of a number,		
 					  description: Calculate the value of the square root of the entered numbers,
 					  produces: [
@@ -280,6 +318,12 @@ var doc = `{
 				},
 				"/calculator/getRecord/{id}": {
 					get: {
+						
+							security: [{
+								Bearer: []
+							}],
+					 
+						
 					summary: Show record by user id,		
 					"parameters": [
 						{
@@ -289,8 +333,9 @@ var doc = `{
 							"required": true,
 							"type": "integer",
 							"format": "int64"
-						}
+						},
 					],
+					
 					"responses": {
 						"200": {
 						  "description": "Record has been displayed"
@@ -300,6 +345,9 @@ var doc = `{
 				},
 				"/calculator/getAllRecords": {
 					get: {
+						security: [{
+							Bearer: []
+						}],
 					summary: Show all records,		
 
 					"responses": {
