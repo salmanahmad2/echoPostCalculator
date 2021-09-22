@@ -111,6 +111,15 @@ func GetAllRecords(c echo.Context) error {
 	return c.JSON(http.StatusOK, respData)
 }
 
+func DeleteRecord(c echo.Context) error {
+	id := c.Param("id")
+	_, err := db.Query("DELETE FROM calculate where id=?", id)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	return c.JSON(http.StatusOK, "Success")
+}
+
 func Add(c echo.Context) error {
 
 	number := new(Numbers)

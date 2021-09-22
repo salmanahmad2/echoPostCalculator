@@ -14,8 +14,7 @@ import (
 func Routes(e *echo.Echo) {
 
 	// e.Use()
-	e.GET("/calculator/getRecord/:id", controller.GetRecord, middlewares.Auth)
-	e.GET("/calculator/getAllRecords", controller.GetAllRecords, middlewares.Auth)
+
 	e.POST("/calculator/add", controller.Add, middlewares.Auth)
 	e.POST("/calculator/subtract", controller.Sub, middlewares.Auth)
 	e.POST("/calculator/multiply", controller.Multiply, middlewares.Auth)
@@ -24,5 +23,8 @@ func Routes(e *echo.Echo) {
 	e.POST("/calculator/square", controller.Square, middlewares.Auth)
 	e.POST("/calculator/power", controller.Power, middlewares.Auth)
 	e.POST("/calculator/sqrt", controller.Sqrt, middlewares.Auth)
+	e.GET("/calculator/getRecord/:id", controller.GetRecord, middlewares.Auth)
+	e.GET("/calculator/getAllRecords", controller.GetAllRecords, middlewares.Auth)
+	e.DELETE("/calculator/deleteRecord/:id", controller.DeleteRecord, middlewares.Auth)
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 }

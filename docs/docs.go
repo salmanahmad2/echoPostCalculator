@@ -357,6 +357,33 @@ var doc = `{
 					},
 				},
 				},
+				"/calculator/deleteRecord/{id}":{
+					delete:{
+						security: [{
+							Bearer: []
+						}],
+						summary: Show record by user id,		
+					"parameters": [
+						{
+							"name": "id",
+							"in": "path",
+							"description": "ID for the specific log",
+							"required": true,
+							"type": "integer",
+							"format": "int64"
+						},
+					],
+						responses:{
+      "204":{
+        description: Deleted,
+	  },
+      "404":{
+        description: id not found,
+	  },
+	}
+}
+					}
+			
 		}, 
 }`
 
